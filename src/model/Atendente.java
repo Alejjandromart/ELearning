@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Atendente extends Usuario {
+    private long celular;
+    private Date dataNasc;
     private String funcao;
     private int fone;
     private Map<Integer, String> historico;
 
-    public Atendente(int id, String nome, String celular, Date dataNasc, String funcao, int fone) {
-        super(id, nome, celular, dataNasc);
+    public Atendente(int id, String nome, long celular, Date dataNasc, String funcao, int fone) {
+        super(id, nome);
+        this.celular = celular;
+        this.dataNasc = dataNasc;
         this.funcao = funcao;
         this.fone = fone;
         this.historico = new HashMap<>();

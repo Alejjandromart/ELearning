@@ -14,8 +14,15 @@ public class Main {
         sc.nextLine();
         System.out.println("Digite o nome do atendente:");
         String nomeAtendente = sc.nextLine();
-        System.out.println("Digite o celular do atendente:");
-        String celularAtendente = sc.nextLine();
+        System.out.println("Digite o celular do atendente (apenas números, padrão Brasil - 11 dígitos):");
+        String celularAtendenteStr = sc.nextLine();
+        long celularAtendente = 0;
+        if (celularAtendenteStr.matches("\\d{11}")) {
+            celularAtendente = Long.parseLong(celularAtendenteStr);
+        } else {
+            System.out.println("Celular inválido! Digite exatamente 11 dígitos numéricos (ex: 11999999999).");
+            // Você pode adicionar um loop de validação aqui se quiser garantir a entrada correta
+        }
         Date dataNascAtendente = new Date();
         System.out.println("Digite o cargo do atendente:");
         String cargo = sc.nextLine();
@@ -30,8 +37,15 @@ public class Main {
         sc.nextLine();
         System.out.println("Digite o nome do professor:");
         String nomeProfessor = sc.nextLine();
-        System.out.println("Digite o celular do professor:");
-        String celularProfessor = sc.nextLine();
+        System.out.println("Digite o celular do professor (apenas números, padrão Brasil - 11 dígitos):");
+        String celularProfessorStr = sc.nextLine();
+        long celularProfessor = 0;
+        if (celularProfessorStr.matches("\\d{11}")) {
+            celularProfessor = Long.parseLong(celularProfessorStr);
+        } else {
+            System.out.println("Celular inválido! Digite exatamente 11 dígitos numéricos (ex: 11999999999).");
+            // Você pode adicionar um loop de validação aqui se quiser garantir a entrada correta
+        }
         Date dataNascProfessor = new Date();
         Professor professor = new Professor(idProfessor, nomeProfessor, celularProfessor, dataNascProfessor);
 

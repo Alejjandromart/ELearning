@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Professor extends Usuario {
+    private long celular;
+    private Date dataNasc;
     private List<String> cursos;
     private List<ExercicioAluno> exerciciosAlunos;
 
-    public Professor(int id, String nome, String celular, Date dataNasc) {
-        super(id, nome, celular, dataNasc);
+    public Professor(int id, String nome, long celular, Date dataNasc) {
+        super(id, nome);
+        this.celular = celular;
+        this.dataNasc = dataNasc;
         this.cursos = new ArrayList<>();
         this.exerciciosAlunos = new ArrayList<>();
     }
@@ -34,6 +38,18 @@ public class Professor extends Usuario {
             this.aulaRealizada = aulaRealizada;
             this.data = data;
             this.acerto = acerto;
+        }
+
+        public int getAulaRealizada() {
+            return aulaRealizada;
+        }
+
+        public Date getData() {
+            return data;
+        }
+
+        public boolean isAcerto() {
+            return acerto;
         }
     }
 
