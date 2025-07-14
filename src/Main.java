@@ -4,23 +4,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         // Recebendo dados do Aluno
-        System.out.println("Digite o ID do aluno:");
-        int idAluno = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Digite o nome do aluno:");
-        String nomeAluno = sc.nextLine();
-        System.out.println("Digite o celular do aluno:");
-        String celularAluno = sc.nextLine();
-        Date dataNascAluno = new Date(); // Para simplificar, usa a data atual
-        System.out.println("Digite a aula atual do aluno:");
-        int aulaAtual = sc.nextInt();
-        System.out.println("Digite os pontos do aluno:");
-        int pontos = sc.nextInt();
-        sc.nextLine();
-        Aluno aluno = new Aluno(idAluno, nomeAluno, celularAluno, dataNascAluno, aulaAtual, pontos);
+        Aluno aluno = Aluno.criarAlunoPorTeclado();
 
+        Scanner sc = new Scanner(System.in);
         // Recebendo dados do Atendente
         System.out.println("Digite o ID do atendente:");
         int idAtendente = sc.nextInt();
