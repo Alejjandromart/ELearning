@@ -79,7 +79,9 @@ public class Aluno extends Usuario {
                 System.out.println("Valor inválido! Digite até 4 dígitos numéricos.");
             }
         }
-        return new Aluno(id, nome, celular, dataNasc, aulaAtual, pontos);
+        Aluno aluno = new Aluno(id, nome, celular, dataNasc, aulaAtual, pontos);
+        // NÃO fechar o Scanner aqui para evitar NoSuchElementException
+        return aluno;
     }
 
     // Getters e Setters específicos
@@ -97,5 +99,13 @@ public class Aluno extends Usuario {
 
     public void setPontos(int pontos) {
         this.pontos = pontos;
+    }
+
+    public long getCelular() {
+        return celular;
+    }
+
+    public Date getDataNasc() {
+        return dataNasc;
     }
 }
