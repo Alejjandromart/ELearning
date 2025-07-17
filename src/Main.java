@@ -13,6 +13,7 @@ public class Main {
         Assinatura assinatura = null;
 
         // Carrega cadastros do arquivo CSV
+        java.util.List<Aluno> alunos = new java.util.ArrayList<>();
         try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader("bin/cadastros.csv"))) {
             String linha;
             while ((linha = br.readLine()) != null) {
@@ -23,19 +24,23 @@ public class Main {
                         int id = Integer.parseInt(partes[0]);
                         String nome = partes[2];
                         long celular = partes[3].isEmpty() ? 0 : Long.parseLong(partes[3]);
-                        aluno = new Aluno(id, nome, celular, new java.util.Date(), 0, 0);
-                    } else if ("Professor".equalsIgnoreCase(tipo)) {
-                        int id = Integer.parseInt(partes[0]);
-                        String nome = partes[2];
-                        long celular = partes[3].isEmpty() ? 0 : Long.parseLong(partes[3]);
-                        java.util.Date dataNasc = new java.util.Date();
-                        professor = new Professor(id, nome, celular, dataNasc);
+                        alunos.add(new Aluno(id, nome, celular, new java.util.Date(), 0, 0));
                     }
                     // Adicione outros tipos conforme necessário
                 }
             }
         } catch (Exception e) {
             System.out.println("Erro ao carregar cadastros: " + e.getMessage());
+        }
+
+        // Exibe todos os alunos cadastrados
+        if (!alunos.isEmpty()) {
+            System.out.println("\nAlunos cadastrados:");
+            for (Aluno a : alunos) {
+                System.out.println("ID: " + a.getId() + " | Nome: " + a.getNome() + " | Celular: " + a.getCelular());
+            }
+        } else {
+            System.out.println("Nenhum aluno cadastrado encontrado.");
         }
         // Garante que o diretório bin existe para salvar o CSV
         File pastaBin = new File("bin");
