@@ -31,16 +31,17 @@ public class Professor extends Usuario {
         this.exerciciosAlunos = new ArrayList<>();
     }
 
-    public void corrigirExercicio(int aula, Date data, boolean acerto) {
-        ExercicioAluno exercicio = new ExercicioAluno(aula, data, acerto);
+    public void corrigirExercicio(int idAluno, int idTarefa, Date data, boolean acerto) {
+        ExercicioAluno exercicio = new ExercicioAluno(idAluno, idTarefa, data, acerto);
         exerciciosAlunos.add(exercicio);
         // Exemplos de uso dos métodos para evitar aviso de não utilizado
-        int aulaRealizada = exercicio.getAulaRealizada();
+        int alunoCorrigido = exercicio.getIdAluno();
+        int tarefaCorrigida = exercicio.getIdTarefa();
         Date dataEx = exercicio.getData();
         boolean acertou = exercicio.isAcerto();
         // Apenas para evitar warnings, pode ser removido se for usado em outro lugar
-        if (aulaRealizada >= 0 && dataEx != null && (acertou == true || acertou == false)) {}
-        System.out.println("Exercício corrigido pelo professor " + this.nome);
+        if (alunoCorrigido >= 0 && tarefaCorrigida >= 0 && dataEx != null && (acertou == true || acertou == false)) {}
+        System.out.println("Exercício " + idTarefa + " do aluno " + idAluno + " corrigido pelo professor " + this.nome);
     }
 
     public void adicionarCurso(String curso) {
@@ -49,18 +50,24 @@ public class Professor extends Usuario {
 
     // Classe interna para representar exercícios de alunos
     private class ExercicioAluno {
-        private int aulaRealizada;
+        private int idAluno;
+        private int idTarefa;
         private Date data;
         private boolean acerto;
 
-        public ExercicioAluno(int aulaRealizada, Date data, boolean acerto) {
-            this.aulaRealizada = aulaRealizada;
+        public ExercicioAluno(int idAluno, int idTarefa, Date data, boolean acerto) {
+            this.idAluno = idAluno;
+            this.idTarefa = idTarefa;
             this.data = data;
             this.acerto = acerto;
         }
 
-        public int getAulaRealizada() {
-            return aulaRealizada;
+        public int getIdAluno() {
+            return idAluno;
+        }
+
+        public int getIdTarefa() {
+            return idTarefa;
         }
 
         public Date getData() {

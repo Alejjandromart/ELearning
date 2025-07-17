@@ -16,9 +16,9 @@ public class Aluno extends Usuario {
         this.pontos = pontos;
     }
 
-    public boolean entregarExercicio() {
+    public boolean entregarExercicio(int idAluno, int idExercicio) {
         // Lógica para entregar exercício
-        System.out.println("Exercício entregue pelo aluno " + this.nome);
+        System.out.println("Exercício " + idExercicio + " entregue pelo aluno " + idAluno + ": " + this.nome);
         return true;
     }
 

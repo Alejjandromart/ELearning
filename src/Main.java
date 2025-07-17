@@ -1,7 +1,7 @@
 import java.io.File;
 import java.util.Scanner;
 import model.*;
-// Fazendo um teste 
+ 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -11,6 +11,32 @@ public class Main {
         Professor professor = null;
         Curso curso = null;
         Assinatura assinatura = null;
+
+        // Carrega cadastros do arquivo CSV
+        try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader("bin/cadastros.csv"))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] partes = linha.split(",");
+                if (partes.length > 1) {
+                    String tipo = partes[1];
+                    if ("Aluno".equalsIgnoreCase(tipo)) {
+                        int id = Integer.parseInt(partes[0]);
+                        String nome = partes[2];
+                        long celular = partes[3].isEmpty() ? 0 : Long.parseLong(partes[3]);
+                        aluno = new Aluno(id, nome, celular, new java.util.Date(), 0, 0);
+                    } else if ("Professor".equalsIgnoreCase(tipo)) {
+                        int id = Integer.parseInt(partes[0]);
+                        String nome = partes[2];
+                        long celular = partes[3].isEmpty() ? 0 : Long.parseLong(partes[3]);
+                        java.util.Date dataNasc = new java.util.Date();
+                        professor = new Professor(id, nome, celular, dataNasc);
+                    }
+                    // Adicione outros tipos conforme necessário
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar cadastros: " + e.getMessage());
+        }
         // Garante que o diretório bin existe para salvar o CSV
         File pastaBin = new File("bin");
         if (!pastaBin.exists()) {
@@ -74,7 +100,13 @@ public class Main {
                     }
                     break;
                 case 3:
-                    entregarExercicio(aluno);
+                    System.out.println("Digite o ID do aluno que está entregando o exercício:");
+                    int idAlunoEntrega = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Digite o ID do exercício a ser entregue:");
+                    int idExercicioEntrega = sc.nextInt();
+                    sc.nextLine();
+                    entregarExercicio(aluno, idAlunoEntrega, idExercicioEntrega);
                     break;
                 case 4:
                     efetuarAssinatura(atendente, aluno);
@@ -86,7 +118,13 @@ public class Main {
                     adicionarCursoAoProfessor(professor, curso);
                     break;
                 case 7:
-                    corrigirExercicio(professor);
+                    System.out.println("Digite o ID do aluno para corrigir a tarefa:");
+                    int idAlunoCorrigir = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Digite o ID da tarefa a ser corrigida:");
+                    int idTarefaCorrigir = sc.nextInt();
+                    sc.nextLine();
+                    corrigirExercicio(professor, idAlunoCorrigir, idTarefaCorrigir);
                     break;
                 case 8:
                     calcularProgresso(curso, aluno);
@@ -208,9 +246,12 @@ public class Main {
         return assinatura;
     }
 
-    private static void entregarExercicio(Aluno aluno) {
-        if (aluno != null) aluno.entregarExercicio();
-        else System.out.println("Cadastre um aluno primeiro!");
+    private static void entregarExercicio(Aluno aluno, int idAluno, int idExercicio) {
+        if (aluno != null) {
+            aluno.entregarExercicio(idAluno, idExercicio);
+        } else {
+            System.out.println("Cadastre um aluno primeiro!");
+        }
     }
 
     private static void efetuarAssinatura(Atendente atendente, Aluno aluno) {
@@ -228,9 +269,14 @@ public class Main {
         else System.out.println("Cadastre professor e curso primeiro!");
     }
 
-    private static void corrigirExercicio(Professor professor) {
-        if (professor != null) professor.corrigirExercicio(1, new java.util.Date(), true);
-        else System.out.println("Cadastre um professor primeiro!");
+    private static void corrigirExercicio(Professor professor, int idAluno, int idTarefa) {
+        if (professor != null) {
+            // Aqui você pode adicionar lógica para buscar o aluno e a tarefa pelo ID
+            // Exemplo: professor.corrigirExercicio(idAluno, idTarefa, new java.util.Date(), true);
+            professor.corrigirExercicio(idAluno, idTarefa, new java.util.Date(), true);
+        } else {
+            System.out.println("Cadastre um professor primeiro!");
+        }
     }
 
     private static void calcularProgresso(Curso curso, Aluno aluno) {
