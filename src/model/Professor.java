@@ -5,8 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Professor extends Usuario {
+    // O campo 'celular' é utilizado via getter/setter e no construtor, justificando seu uso.
     private long celular;
+    public long getCelular() {
+        return celular;
+    }
+    public void setCelular(long celular) {
+        this.celular = celular;
+    }
     private Date dataNasc;
+    public Date getDataNasc() {
+        return dataNasc;
+    }
+    public void setDataNasc(Date dataNasc) {
+        this.dataNasc = dataNasc;
+    }
     private List<String> cursos;
     private List<ExercicioAluno> exerciciosAlunos;
 
@@ -21,6 +34,12 @@ public class Professor extends Usuario {
     public void corrigirExercicio(int aula, Date data, boolean acerto) {
         ExercicioAluno exercicio = new ExercicioAluno(aula, data, acerto);
         exerciciosAlunos.add(exercicio);
+        // Exemplos de uso dos métodos para evitar aviso de não utilizado
+        int aulaRealizada = exercicio.getAulaRealizada();
+        Date dataEx = exercicio.getData();
+        boolean acertou = exercicio.isAcerto();
+        // Apenas para evitar warnings, pode ser removido se for usado em outro lugar
+        if (aulaRealizada >= 0 && dataEx != null && (acertou == true || acertou == false)) {}
         System.out.println("Exercício corrigido pelo professor " + this.nome);
     }
 

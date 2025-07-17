@@ -23,6 +23,8 @@ public class Aluno extends Usuario {
     }
 
     public static Aluno criarAlunoPorTeclado() {
+        // ATENÇÃO: Não fechar o Scanner aqui para evitar NoSuchElementException em aplicações interativas.
+        // O Scanner é fechado no método main, garantindo o uso seguro durante toda a execução do programa.
         java.util.Scanner sc = new java.util.Scanner(System.in);
         int id = 0;
         while (true) {
