@@ -362,9 +362,21 @@ public class Main {
             }
         }
         java.util.Date dataNascAtendente = new java.util.Date();
-        System.out.println("Digite o número de matrícula do atendente:");
-        int matricula = sc.nextInt();
-        sc.nextLine();
+        int matricula = 0;
+        while (true) {
+            System.out.println("Digite o número de matrícula do atendente (8 dígitos):");
+            String matriculaStr = sc.nextLine();
+            if (!matriculaStr.matches("^\\d{8}$")) {
+                System.out.println("Matrícula inválida! Deve conter exatamente 8 dígitos numéricos.");
+                continue;
+            }
+            try {
+                matricula = Integer.parseInt(matriculaStr);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Matrícula inválida! Digite apenas números inteiros.");
+            }
+        }
         Atendente atendente = new Atendente(idAtendente, nomeAtendente, celularAtendente, dataNascAtendente, "Atendente", matricula);
         registrarId(idAtendente);
         try (java.io.FileWriter fw = new java.io.FileWriter("bin/cadastros.csv", true)) {
