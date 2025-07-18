@@ -366,6 +366,7 @@ public class Main {
         registrarId(idAluno);
         try (java.io.FileWriter fw = new java.io.FileWriter("bin/cadastros.csv", true)) {
             fw.write(idAluno + ",Aluno," + nomeAluno + "," + celularAluno + ",,,,\n");
+            System.out.println("Cadastro de aluno realizado com sucesso!");
         } catch (java.io.IOException e) {
             System.out.println("Erro ao salvar cadastro do aluno: " + e.getMessage());
         }
@@ -429,6 +430,7 @@ public class Main {
         registrarId(idAtendente);
         try (java.io.FileWriter fw = new java.io.FileWriter("bin/cadastros.csv", true)) {
             fw.write(idAtendente + ",Atendente," + nomeAtendente + "," + celularAtendente + "," + dataNascAtendente + ",Atendente," + matricula + ",,,\n");
+            System.out.println("Cadastro de atendente realizado com sucesso!");
         } catch (java.io.IOException e) {
             System.out.println("Erro ao salvar cadastro do atendente: " + e.getMessage());
         }
@@ -477,6 +479,7 @@ public class Main {
         registrarId(idProfessor);
         try (java.io.FileWriter fw = new java.io.FileWriter("bin/cadastros.csv", true)) {
             fw.write(idProfessor + ",Professor," + nomeProfessor + "," + celularProfessor + "," + dataNascProfessor + ",,,,,\n");
+            System.out.println("Cadastro de professor realizado com sucesso!");
         } catch (java.io.IOException e) {
             System.out.println("Erro ao salvar cadastro do professor: " + e.getMessage());
         }
@@ -500,6 +503,7 @@ public class Main {
         Curso curso = new Curso(idCurso, nomeCurso);
         try (java.io.FileWriter fw = new java.io.FileWriter("bin/cadastros.csv", true)) {
             fw.write(idCurso + ",Curso," + nomeCurso + ",,,,,,,\n");
+            System.out.println("Cadastro de curso realizado com sucesso!");
         } catch (java.io.IOException e) {
             System.out.println("Erro ao salvar cadastro do curso: " + e.getMessage());
         }
@@ -555,6 +559,7 @@ public class Main {
             assinatura = new Assinatura(idAssinatura, aluno.getId(), tipoPlano, valorAssinatura);
             try (java.io.FileWriter fw = new java.io.FileWriter("bin/cadastros.csv", true)) {
                 fw.write(idAssinatura + ",Assinatura,,,,,,," + tipoPlano + "," + valorAssinatura + "\n");
+                System.out.println("Cadastro de assinatura realizado com sucesso!");
             } catch (java.io.IOException e) {
                 System.out.println("Erro ao salvar cadastro da assinatura: " + e.getMessage());
             }
