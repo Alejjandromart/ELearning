@@ -1,6 +1,14 @@
-12345678,Aluno,Dieglison Varejao,92991300871,,,,
-12345687,Professor,Carlos Barata,0,Thu Jul 17 21:06:26 AMT 2025,,,,,
-24568973,Curso,POO,,,,,,,
-12369854,Aluno,Sergio,92991300871,,,,
-12345678,Aluno,Dieglison Varejao,92991300871,,,,
-12345678,Curso,POO,,,,,,,
+# Alunos
+id,nome,celular,dataCadastro,pontos,aulaAtual
+12345678,Dieglison Varejao,92991300871,,,,
+
+# Professores
+id,nome,celular,dataCadastro
+12345687,Carlos Barata,92991300871,Thu Jul 17 22:06:28 AMT 2025
+
+# Atendentes
+id,nome,celular,dataCadastro
+
+# Cursos
+id,nome
+
