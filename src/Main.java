@@ -220,8 +220,30 @@ public class Main {
                     adicionarCursoAoProfessor(professor, curso);
                     break;
                 case 5:
+                    if (professores.isEmpty()) {
+                        System.out.println("Nenhum professor cadastrado encontrado.");
+                        break;
+                    }
                     if (alunos.isEmpty()) {
                         System.out.println("Nenhum aluno cadastrado encontrado.");
+                        break;
+                    }
+                    System.out.println("Digite o ID do professor que irá corrigir (8 dígitos):");
+                    String idProfessorCorrigirStr = sc.nextLine();
+                    if (!idProfessorCorrigirStr.matches("^\\d{8}$")) {
+                        System.out.println("ID inválido! O ID do professor deve conter exatamente 8 dígitos numéricos.");
+                        break;
+                    }
+                    int idProfessorCorrigir = Integer.parseInt(idProfessorCorrigirStr);
+                    Professor professorCorrigir = null;
+                    for (Professor p : professores) {
+                        if (p.getId() == idProfessorCorrigir) {
+                            professorCorrigir = p;
+                            break;
+                        }
+                    }
+                    if (professorCorrigir == null) {
+                        System.out.println("Professor não encontrado com esse ID.");
                         break;
                     }
                     System.out.println("Digite o ID do aluno para corrigir a tarefa (8 dígitos):");
@@ -245,7 +267,7 @@ public class Main {
                     System.out.println("Digite o ID da tarefa a ser corrigida:");
                     int idTarefaCorrigir = sc.nextInt();
                     sc.nextLine();
-                    corrigirExercicio(professor, idAlunoCorrigir, idTarefaCorrigir);
+                    corrigirExercicio(professorCorrigir, idAlunoCorrigir, idTarefaCorrigir);
                     break;
                 case 6:
                     if (alunos.isEmpty()) {
