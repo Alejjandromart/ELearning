@@ -383,6 +383,10 @@ public class Main {
 
     private static void calcularProgresso(Curso curso, Aluno aluno) {
         if (curso != null && aluno != null) {
+            if (aluno.getId() == curso.getIdCurso()) {
+                System.out.println("O ID do Aluno e o ID do Curso não podem ser iguais! Por favor, cadastre IDs diferentes.");
+                return;
+            }
             int[] progresso = curso.calcularProgresso(aluno.getId(), curso.getIdCurso());
             System.out.println("Progresso do aluno no curso:");
             System.out.println("ID Aluno: " + progresso[0]);
