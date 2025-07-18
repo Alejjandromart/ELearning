@@ -223,8 +223,16 @@ public class Main {
                 break;
             }
         }
-        System.out.println("Digite o nome do aluno:");
-        String nomeAluno = sc.nextLine();
+        String nomeAluno = "";
+        while (true) {
+            System.out.println("Digite o nome do aluno (apenas letras e espaços, até 30 caracteres):");
+            nomeAluno = sc.nextLine();
+            if (!nomeAluno.matches("^[A-Za-zÀ-ÿ ]{1,30}$")) {
+                System.out.println("Nome inválido! Digite apenas letras e espaços, até 30 caracteres.");
+            } else {
+                break;
+            }
+        }
         long celularAluno = 0;
         while (true) {
             System.out.println("Digite o celular do aluno (apenas números, padrão Brasil - 11 dígitos):");
@@ -291,8 +299,16 @@ public class Main {
                 break;
             }
         }
-        System.out.println("Digite o nome do atendente:");
-        String nomeAtendente = sc.nextLine();
+        String nomeAtendente = "";
+        while (true) {
+            System.out.println("Digite o nome do atendente (apenas letras e espaços, até 30 caracteres):");
+            nomeAtendente = sc.nextLine();
+            if (!nomeAtendente.matches("^[A-Za-zÀ-ÿ ]{1,30}$")) {
+                System.out.println("Nome inválido! Digite apenas letras e espaços, até 30 caracteres.");
+            } else {
+                break;
+            }
+        }
         long celularAtendente = 0;
         while (true) {
             System.out.println("Digite o celular do atendente (apenas números, padrão Brasil - 11 dígitos):");
@@ -336,8 +352,16 @@ public class Main {
                 break;
             }
         }
-        System.out.println("Digite o nome do professor:");
-        String nomeProfessor = sc.nextLine();
+        String nomeProfessor = "";
+        while (true) {
+            System.out.println("Digite o nome do professor (apenas letras e espaços, até 30 caracteres):");
+            nomeProfessor = sc.nextLine();
+            if (!nomeProfessor.matches("^[A-Za-zÀ-ÿ ]{1,30}$")) {
+                System.out.println("Nome inválido! Digite apenas letras e espaços, até 30 caracteres.");
+            } else {
+                break;
+            }
+        }
         long celularProfessor = 0;
         while (true) {
             System.out.println("Digite o celular do professor (apenas números, padrão Brasil - 11 dígitos):");
