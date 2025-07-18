@@ -86,7 +86,6 @@ public class Main {
                             professor = cadastrarProfessor(sc);
                             break;
                         case 0:
-                            // Voltar ao menu principal
                             break;
                         default:
                             System.out.println("Opção inválida!");
@@ -193,7 +192,6 @@ public class Main {
             }
         }
         java.util.Date dataNascAluno = new java.util.Date();
-        // Pontos do aluno
         double pontos = 0.0;
         boolean pontosValidos = false;
         do {
@@ -210,7 +208,6 @@ public class Main {
                 System.out.println("Valor inválido! Digite até 4 dígitos antes do ponto e até 2 após (ex: 10.00).");
             }
         } while (!pontosValidos);
-        // Aula atual
         int aulaAtual = 0;
         boolean aulaValida = false;
         do {
@@ -373,8 +370,6 @@ public class Main {
 
     private static void corrigirExercicio(Professor professor, int idAluno, int idTarefa) {
         if (professor != null) {
-            // Aqui você pode adicionar lógica para buscar o aluno e a tarefa pelo ID
-            // Exemplo: professor.corrigirExercicio(idAluno, idTarefa, new java.util.Date(), true);
             professor.corrigirExercicio(idAluno, idTarefa, new java.util.Date(), true);
         } else {
             System.out.println("Cadastre um professor primeiro!");

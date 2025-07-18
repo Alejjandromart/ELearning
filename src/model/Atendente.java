@@ -1,7 +1,6 @@
 package model;
 
 import java.util.Date;
-// ...existing code...
 import java.util.Map;
 
 public class Atendente extends Usuario {
@@ -14,7 +13,7 @@ public class Atendente extends Usuario {
     private String funcao;
     private int fone;
     private Map<Integer, String> historico;
-    // ...existing code...
+    
     public long getCelular() {
         return celular;
     }
@@ -33,7 +32,7 @@ public class Atendente extends Usuario {
         this.celular = celular;
         this.dataNasc = dataNasc;
         this.funcao = funcao;
-        // Métodos getFone e setFone removidos para evitar duplicidade
+        
         this.historico = new java.util.HashMap<>();
     }
 
@@ -52,7 +51,6 @@ public class Atendente extends Usuario {
         historico.put(idUsuario, "Pagamento resolvido em " + new java.util.Date());
     }
 
-    // Getters e Setters específicos
     public String getFuncao() {
         return funcao;
     }

@@ -9,7 +9,6 @@ public abstract class Usuario {
         this.nome = nome;
     }
 
-    // Getters e Setters
     public int getId() {
         return id;
     }

@@ -79,7 +79,6 @@ public class Professor extends Usuario {
         }
     }
 
-    // Getters e Setters específicos
     public List<String> getCursos() {
         return cursos;
     }

@@ -7,7 +7,7 @@ public class Curso {
     private int idCurso;
     private String nomeCurso;
     private int percRealizado;
-    private Map<Integer, Integer> progressoAlunos; // idAluno -> progresso
+    private Map<Integer, Integer> progressoAlunos; 
 
     public Curso(int idCurso, String nomeCurso) {
         this.idCurso = idCurso;
@@ -23,7 +23,6 @@ public class Curso {
         return new int[]{idAluno, idCurso, progresso};
     }
 
-    // Getters e Setters
     public int getIdCurso() {
         return idCurso;
     }

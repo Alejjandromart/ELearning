@@ -37,7 +37,6 @@ public class Assinatura {
         return new int[]{idAssina, idAluno, idNF, idVia};
     }
 
-    // Getters e Setters
     public int getIdAssinatura() {
         return idAssinatura;
     }

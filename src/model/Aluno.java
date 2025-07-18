@@ -17,7 +17,6 @@ public class Aluno extends Usuario {
     }
 
     public boolean entregarExercicio(int idAluno, int idExercicio) {
-        // Lógica para entregar exercício
         System.out.println("Exercício " + idExercicio + " entregue pelo aluno " + idAluno + ": " + this.nome);
         return true;
     }
@@ -90,7 +89,6 @@ public class Aluno extends Usuario {
         return aluno;
     }
 
-    // Getters e Setters específicos
     public int getAulaAtual() {
         return aulaAtual;
     }
