@@ -159,9 +159,54 @@ public class Main {
     }
 
     private static Aluno cadastrarAluno(Scanner sc) {
-        Aluno aluno = Aluno.criarAlunoPorTeclado();
+        // Coleta dados do aluno manualmente para tratar pontos como decimal
+        System.out.println("Digite o ID do aluno:");
+        int idAluno = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Digite o nome do aluno:");
+        String nomeAluno = sc.nextLine();
+        System.out.println("Digite o celular do aluno (apenas números, padrão Brasil - 11 dígitos):");
+        String celularAlunoStr = sc.nextLine();
+        long celularAluno = 0;
+        if (celularAlunoStr.matches("\\d{11}")) {
+            celularAluno = Long.parseLong(celularAlunoStr);
+        } else {
+            System.out.println("Celular inválido! Digite exatamente 11 dígitos numéricos (ex: 11999999999).");
+        }
+        java.util.Date dataNascAluno = new java.util.Date();
+        // Pontos do aluno
+        double pontos = 0.0;
+        boolean pontosValidos = false;
+        do {
+            System.out.println("Digite os pontos do aluno (máximo 4 dígitos antes do ponto e até 2 após, ex: 10.00):");
+            String pontosStr = sc.nextLine();
+            if (pontosStr.matches("^\\d{1,4}(\\.\\d{1,2})?$")) {
+                try {
+                    pontos = Double.parseDouble(pontosStr);
+                    pontosValidos = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Valor inválido! Digite um número decimal válido.");
+                }
+            } else {
+                System.out.println("Valor inválido! Digite até 4 dígitos antes do ponto e até 2 após (ex: 10.00).");
+            }
+        } while (!pontosValidos);
+        // Aula atual
+        int aulaAtual = 0;
+        boolean aulaValida = false;
+        do {
+            System.out.println("Digite o número da aula atual do aluno:");
+            String aulaStr = sc.nextLine();
+            if (aulaStr.matches("^\\d{1,4}$")) {
+                aulaAtual = Integer.parseInt(aulaStr);
+                aulaValida = true;
+            } else {
+                System.out.println("Valor inválido! Digite até 4 dígitos numéricos.");
+            }
+        } while (!aulaValida);
+        Aluno aluno = new Aluno(idAluno, nomeAluno, celularAluno, dataNascAluno, aulaAtual, pontos);
         try (java.io.FileWriter fw = new java.io.FileWriter("bin/cadastros.csv", true)) {
-            fw.write(aluno.getId() + ",Aluno," + aluno.getNome() + "," + aluno.getCelular() + ",,,,\n");
+            fw.write(idAluno + ",Aluno," + nomeAluno + "," + celularAluno + ",,,,\n");
         } catch (java.io.IOException e) {
             System.out.println("Erro ao salvar cadastro do aluno: " + e.getMessage());
         }
