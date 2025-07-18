@@ -20,13 +20,13 @@ public class Aluno extends Usuario {
         // Lógica para entregar exercício
         System.out.println("Exercício " + idExercicio + " entregue pelo aluno " + idAluno + ": " + this.nome);
         return true;
-    }
+    private double pontos;
 
     public static Aluno criarAlunoPorTeclado() {
         // ATENÇÃO: Não fechar o Scanner aqui para evitar NoSuchElementException em aplicações interativas.
         // O Scanner é fechado no método main, garantindo o uso seguro durante toda a execução do programa.
         java.util.Scanner sc = new java.util.Scanner(System.in);
-        int id = 0;
+        this.pontos = (double) pontos;
         while (true) {
             System.out.println("Digite o ID do aluno (exatamente 8 dígitos):");
             String idStr = sc.nextLine();
@@ -87,15 +87,15 @@ public class Aluno extends Usuario {
     }
 
     // Getters e Setters específicos
-    public int getAulaAtual() {
+        Aluno aluno = new Aluno(id, nome, celular, dataNasc, aulaAtual, (double) pontos);
         return aulaAtual;
     }
 
     public void setAulaAtual(int aulaAtual) {
-        this.aulaAtual = aulaAtual;
+        this.pontos = (double) pontos;
     }
 
-    public int getPontos() {
+        return this.pontos;
         return pontos;
     }
 
