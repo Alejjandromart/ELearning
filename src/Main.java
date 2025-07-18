@@ -129,9 +129,15 @@ public class Main {
                     switch (tipoUsuario) {
                         case 1:
                             aluno = cadastrarAluno(sc);
+                            if (aluno != null) {
+                                alunos.add(aluno);
+                            }
                             break;
                         case 2:
                             professor = cadastrarProfessor(sc);
+                            if (professor != null) {
+                                professores.add(professor);
+                            }
                             break;
                         case 0:
                             break;
@@ -153,12 +159,21 @@ public class Main {
                     switch (opAtendente) {
                         case 1:
                             atendente = cadastrarAtendente(sc);
+                            if (atendente != null) {
+                                atendentes.add(atendente);
+                            }
                             break;
                         case 2:
                             curso = cadastrarCurso(sc);
+                            if (curso != null) {
+                                cursos.add(curso);
+                            }
                             break;
                         case 3:
                             assinatura = cadastrarAssinatura(sc, aluno);
+                            if (assinatura != null) {
+                                assinaturas.add(assinatura);
+                            }
                             break;
                         case 4:
                             efetuarAssinatura(atendente, aluno);
