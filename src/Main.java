@@ -470,8 +470,23 @@ public class Main {
             idAssinatura = Integer.parseInt(idAssinaturaStr);
             break;
         }
-        System.out.println("Digite o tipo de plano:");
-        String tipoPlano = sc.nextLine();
+        String tipoPlano = "";
+        while (true) {
+            System.out.println("Escolha o tipo de plano:");
+            System.out.println("1 - Mensal");
+            System.out.println("2 - Anual");
+            System.out.print("Opção: ");
+            String opPlano = sc.nextLine();
+            if (opPlano.equals("1")) {
+                tipoPlano = "Mensal";
+                break;
+            } else if (opPlano.equals("2")) {
+                tipoPlano = "Anual";
+                break;
+            } else {
+                System.out.println("Opção inválida! Escolha 1 para Mensal ou 2 para Anual.");
+            }
+        }
         double valorAssinatura = 0.0;
         while (true) {
             System.out.println("Digite o valor da assinatura (ex: 2.75):");
