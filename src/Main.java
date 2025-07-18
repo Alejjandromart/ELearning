@@ -135,6 +135,25 @@ public class Main {
                     entregarExercicio(aluno, idAlunoEntrega, idExercicioEntrega);
                     break;
                 case 4:
+                    if (professor == null) {
+                        System.out.println("Cadastre um professor primeiro!");
+                        break;
+                    }
+                    if (curso == null) {
+                        System.out.println("Cadastre um curso primeiro!");
+                        break;
+                    }
+                    System.out.println("Digite o ID do curso a ser adicionado ao professor (8 dígitos):");
+                    String idCursoStr = sc.nextLine();
+                    if (!idCursoStr.matches("^\\d{8}$")) {
+                        System.out.println("ID inválido! O ID do curso deve conter exatamente 8 dígitos numéricos.");
+                        break;
+                    }
+                    int idCursoBusca = Integer.parseInt(idCursoStr);
+                    if (curso.getIdCurso() != idCursoBusca) {
+                        System.out.println("Curso não encontrado com esse ID. Cadastre o curso primeiro!");
+                        break;
+                    }
                     adicionarCursoAoProfessor(professor, curso);
                     break;
                 case 5:
