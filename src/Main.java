@@ -210,13 +210,39 @@ public class Main {
                     entregarExercicio(aluno, idAlunoEntrega, idExercicioEntrega);
                     break;
                 case 4:
-                    if (professor == null) {
-                        System.out.println("Cadastre um professor primeiro!");
+                    if (professores.isEmpty()) {
+                        System.out.println("Nenhum professor cadastrado encontrado.");
                         break;
                     }
-                    if (curso == null) {
-                        System.out.println("Cadastre um curso primeiro!");
+                    if (cursos.isEmpty()) {
+                        System.out.println("Nenhum curso cadastrado encontrado.");
                         break;
+                    }
+                    System.out.println("Professores cadastrados:");
+                    for (Professor p : professores) {
+                        System.out.println("ID: " + p.getId() + " | Nome: " + p.getNome());
+                    }
+                    System.out.println("Digite o ID do professor ao qual deseja adicionar o curso (8 dígitos):");
+                    String idProfessorStr = sc.nextLine();
+                    if (!idProfessorStr.matches("^\\d{8}$")) {
+                        System.out.println("ID inválido! O ID do professor deve conter exatamente 8 dígitos numéricos.");
+                        break;
+                    }
+                    int idProfessorBusca = Integer.parseInt(idProfessorStr);
+                    Professor professorBusca = null;
+                    for (Professor p : professores) {
+                        if (p.getId() == idProfessorBusca) {
+                            professorBusca = p;
+                            break;
+                        }
+                    }
+                    if (professorBusca == null) {
+                        System.out.println("Professor não encontrado com esse ID.");
+                        break;
+                    }
+                    System.out.println("Cursos cadastrados:");
+                    for (Curso c : cursos) {
+                        System.out.println("ID: " + c.getIdCurso() + " | Nome: " + c.getNomeCurso());
                     }
                     System.out.println("Digite o ID do curso a ser adicionado ao professor (8 dígitos):");
                     String idCursoStr = sc.nextLine();
@@ -225,11 +251,18 @@ public class Main {
                         break;
                     }
                     int idCursoBusca = Integer.parseInt(idCursoStr);
-                    if (curso.getIdCurso() != idCursoBusca) {
+                    Curso cursoBusca = null;
+                    for (Curso c : cursos) {
+                        if (c.getIdCurso() == idCursoBusca) {
+                            cursoBusca = c;
+                            break;
+                        }
+                    }
+                    if (cursoBusca == null) {
                         System.out.println("Curso não encontrado com esse ID. Cadastre o curso primeiro!");
                         break;
                     }
-                    adicionarCursoAoProfessor(professor, curso);
+                    adicionarCursoAoProfessor(professorBusca, cursoBusca);
                     break;
                 case 5:
                     if (professores.isEmpty()) {
