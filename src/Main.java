@@ -362,15 +362,13 @@ public class Main {
             }
         }
         java.util.Date dataNascAtendente = new java.util.Date();
-        System.out.println("Digite o cargo do atendente:");
-        String cargo = sc.nextLine();
         System.out.println("Digite o número de matrícula do atendente:");
         int matricula = sc.nextInt();
         sc.nextLine();
-        Atendente atendente = new Atendente(idAtendente, nomeAtendente, celularAtendente, dataNascAtendente, cargo, matricula);
+        Atendente atendente = new Atendente(idAtendente, nomeAtendente, celularAtendente, dataNascAtendente, "Atendente", matricula);
         registrarId(idAtendente);
         try (java.io.FileWriter fw = new java.io.FileWriter("bin/cadastros.csv", true)) {
-            fw.write(idAtendente + ",Atendente," + nomeAtendente + "," + celularAtendente + "," + dataNascAtendente + "," + cargo + "," + matricula + ",,,\n");
+            fw.write(idAtendente + ",Atendente," + nomeAtendente + "," + celularAtendente + "," + dataNascAtendente + ",Atendente," + matricula + ",,,\n");
         } catch (java.io.IOException e) {
             System.out.println("Erro ao salvar cadastro do atendente: " + e.getMessage());
         }
