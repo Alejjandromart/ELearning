@@ -185,7 +185,29 @@ public class Main {
                     corrigirExercicio(professor, idAlunoCorrigir, idTarefaCorrigir);
                     break;
                 case 6:
-                    calcularProgresso(curso, aluno);
+                    if (alunos.isEmpty()) {
+                        System.out.println("Nenhum aluno cadastrado encontrado.");
+                        break;
+                    }
+                    System.out.println("Digite o ID do aluno para calcular o progresso (8 dígitos):");
+                    String idAlunoProgStr = sc.nextLine();
+                    if (!idAlunoProgStr.matches("^\\d{8}$")) {
+                        System.out.println("ID inválido! O ID do aluno deve conter exatamente 8 dígitos numéricos.");
+                        break;
+                    }
+                    int idAlunoProg = Integer.parseInt(idAlunoProgStr);
+                    Aluno alunoProg = null;
+                    for (Aluno a : alunos) {
+                        if (a.getId() == idAlunoProg) {
+                            alunoProg = a;
+                            break;
+                        }
+                    }
+                    if (alunoProg == null) {
+                        System.out.println("Aluno não encontrado com esse ID.");
+                        break;
+                    }
+                    calcularProgresso(curso, alunoProg);
                     break;
                 case 7:
                     emitirFatura(assinatura, aluno);
