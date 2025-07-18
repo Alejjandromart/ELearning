@@ -584,8 +584,16 @@ public class Main {
             idCurso = Integer.parseInt(idCursoStr);
             break;
         }
-        System.out.println("Digite o nome do curso:");
-        String nomeCurso = sc.nextLine();
+        String nomeCurso = "";
+        while (true) {
+            System.out.println("Digite o nome do curso (apenas letras e espaços, até 100 caracteres):");
+            nomeCurso = sc.nextLine();
+            if (!nomeCurso.matches("^[A-Za-zÀ-ÿ ]{1,100}$")) {
+                System.out.println("Nome inválido! Digite apenas letras e espaços, até 100 caracteres.");
+            } else {
+                break;
+            }
+        }
         Curso curso = new Curso(idCurso, nomeCurso);
         try (java.io.FileWriter fw = new java.io.FileWriter("bin/cadastros.csv", true)) {
             fw.write(idCurso + ",Curso," + nomeCurso + ",,,,,,,\n");
