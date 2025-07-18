@@ -192,9 +192,21 @@ public class Main {
                     System.out.println("Digite o ID do aluno que está entregando o exercício:");
                     int idAlunoEntrega = sc.nextInt();
                     sc.nextLine();
-                    System.out.println("Digite o ID do exercício a ser entregue:");
-                    int idExercicioEntrega = sc.nextInt();
-                    sc.nextLine();
+                    int idExercicioEntrega = 0;
+                    while (true) {
+                        System.out.println("Digite o ID do exercício a ser entregue (8 dígitos):");
+                        String idExercicioStr = sc.nextLine();
+                        if (!idExercicioStr.matches("^\\d{8}$")) {
+                            System.out.println("ID inválido! O ID do exercício deve conter exatamente 8 dígitos numéricos.");
+                            continue;
+                        }
+                        try {
+                            idExercicioEntrega = Integer.parseInt(idExercicioStr);
+                            break;
+                        } catch (NumberFormatException e) {
+                            System.out.println("ID inválido! Digite apenas números inteiros.");
+                        }
+                    }
                     entregarExercicio(aluno, idAlunoEntrega, idExercicioEntrega);
                     break;
                 case 4:
