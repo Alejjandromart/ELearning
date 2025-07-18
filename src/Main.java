@@ -3,6 +3,14 @@ import java.util.Scanner;
 import model.*;
  
 public class Main {
+    // IDs já cadastrados para evitar duplicidade entre Aluno, Professor e Atendente
+    private static java.util.Set<Integer> idsCadastrados = new java.util.HashSet<>();
+    private static boolean idJaCadastrado(int id) {
+        return idsCadastrados.contains(id);
+    }
+    private static void registrarId(int id) {
+        idsCadastrados.add(id);
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int opcao;
@@ -160,18 +168,29 @@ public class Main {
 
     private static Aluno cadastrarAluno(Scanner sc) {
         // Coleta dados do aluno manualmente para tratar pontos como decimal
-        System.out.println("Digite o ID do aluno:");
-        int idAluno = sc.nextInt();
-        sc.nextLine();
+        int idAluno = 0;
+        while (true) {
+            System.out.println("Digite o ID do aluno:");
+            idAluno = sc.nextInt();
+            sc.nextLine();
+            if (idJaCadastrado(idAluno)) {
+                System.out.println("ID já utilizado por outro usuário! Digite um ID diferente.");
+            } else {
+                break;
+            }
+        }
         System.out.println("Digite o nome do aluno:");
         String nomeAluno = sc.nextLine();
-        System.out.println("Digite o celular do aluno (apenas números, padrão Brasil - 11 dígitos):");
-        String celularAlunoStr = sc.nextLine();
         long celularAluno = 0;
-        if (celularAlunoStr.matches("\\d{11}")) {
-            celularAluno = Long.parseLong(celularAlunoStr);
-        } else {
-            System.out.println("Celular inválido! Digite exatamente 11 dígitos numéricos (ex: 11999999999).");
+        while (true) {
+            System.out.println("Digite o celular do aluno (apenas números, padrão Brasil - 11 dígitos):");
+            String celularAlunoStr = sc.nextLine();
+            if (celularAlunoStr.matches("\\d{11}")) {
+                celularAluno = Long.parseLong(celularAlunoStr);
+                break;
+            } else {
+                System.out.println("Celular inválido! Digite exatamente 11 dígitos numéricos (apenas números, padrão Brasil - 11 dígitos).");
+            }
         }
         java.util.Date dataNascAluno = new java.util.Date();
         // Pontos do aluno
@@ -205,6 +224,7 @@ public class Main {
             }
         } while (!aulaValida);
         Aluno aluno = new Aluno(idAluno, nomeAluno, celularAluno, dataNascAluno, aulaAtual, pontos);
+        registrarId(idAluno);
         try (java.io.FileWriter fw = new java.io.FileWriter("bin/cadastros.csv", true)) {
             fw.write(idAluno + ",Aluno," + nomeAluno + "," + celularAluno + ",,,,\n");
         } catch (java.io.IOException e) {
@@ -214,18 +234,29 @@ public class Main {
     }
 
     private static Atendente cadastrarAtendente(Scanner sc) {
-        System.out.println("Digite o ID do atendente:");
-        int idAtendente = sc.nextInt();
-        sc.nextLine();
+        int idAtendente = 0;
+        while (true) {
+            System.out.println("Digite o ID do atendente:");
+            idAtendente = sc.nextInt();
+            sc.nextLine();
+            if (idJaCadastrado(idAtendente)) {
+                System.out.println("ID já utilizado por outro usuário! Digite um ID diferente.");
+            } else {
+                break;
+            }
+        }
         System.out.println("Digite o nome do atendente:");
         String nomeAtendente = sc.nextLine();
-        System.out.println("Digite o celular do atendente (apenas números, padrão Brasil - 11 dígitos):");
-        String celularAtendenteStr = sc.nextLine();
         long celularAtendente = 0;
-        if (celularAtendenteStr.matches("\\d{11}")) {
-            celularAtendente = Long.parseLong(celularAtendenteStr);
-        } else {
-            System.out.println("Celular inválido! Digite exatamente 11 dígitos numéricos (ex: 11999999999).");
+        while (true) {
+            System.out.println("Digite o celular do atendente (apenas números, padrão Brasil - 11 dígitos):");
+            String celularAtendenteStr = sc.nextLine();
+            if (celularAtendenteStr.matches("\\d{11}")) {
+                celularAtendente = Long.parseLong(celularAtendenteStr);
+                break;
+            } else {
+                System.out.println("Celular inválido! Digite exatamente 11 dígitos numéricos (apenas números, padrão Brasil - 11 dígitos).");
+            }
         }
         java.util.Date dataNascAtendente = new java.util.Date();
         System.out.println("Digite o cargo do atendente:");
@@ -234,6 +265,7 @@ public class Main {
         int matricula = sc.nextInt();
         sc.nextLine();
         Atendente atendente = new Atendente(idAtendente, nomeAtendente, celularAtendente, dataNascAtendente, cargo, matricula);
+        registrarId(idAtendente);
         try (java.io.FileWriter fw = new java.io.FileWriter("bin/cadastros.csv", true)) {
             fw.write(idAtendente + ",Atendente," + nomeAtendente + "," + celularAtendente + "," + dataNascAtendente + "," + cargo + "," + matricula + ",,,\n");
         } catch (java.io.IOException e) {
@@ -243,21 +275,33 @@ public class Main {
     }
 
     private static Professor cadastrarProfessor(Scanner sc) {
-        System.out.println("Digite o ID do professor:");
-        int idProfessor = sc.nextInt();
-        sc.nextLine();
+        int idProfessor = 0;
+        while (true) {
+            System.out.println("Digite o ID do professor:");
+            idProfessor = sc.nextInt();
+            sc.nextLine();
+            if (idJaCadastrado(idProfessor)) {
+                System.out.println("ID já utilizado por outro usuário! Digite um ID diferente.");
+            } else {
+                break;
+            }
+        }
         System.out.println("Digite o nome do professor:");
         String nomeProfessor = sc.nextLine();
-        System.out.println("Digite o celular do professor (apenas números, padrão Brasil - 11 dígitos):");
-        String celularProfessorStr = sc.nextLine();
         long celularProfessor = 0;
-        if (celularProfessorStr.matches("\\d{11}")) {
-            celularProfessor = Long.parseLong(celularProfessorStr);
-        } else {
-            System.out.println("Celular inválido! Digite exatamente 11 dígitos numéricos (ex: 11999999999).");
+        while (true) {
+            System.out.println("Digite o celular do professor (apenas números, padrão Brasil - 11 dígitos):");
+            String celularProfessorStr = sc.nextLine();
+            if (celularProfessorStr.matches("\\d{11}")) {
+                celularProfessor = Long.parseLong(celularProfessorStr);
+                break;
+            } else {
+                System.out.println("Celular inválido! Digite exatamente 11 dígitos numéricos (apenas números, padrão Brasil - 11 dígitos).");
+            }
         }
         java.util.Date dataNascProfessor = new java.util.Date();
         Professor professor = new Professor(idProfessor, nomeProfessor, celularProfessor, dataNascProfessor);
+        registrarId(idProfessor);
         try (java.io.FileWriter fw = new java.io.FileWriter("bin/cadastros.csv", true)) {
             fw.write(idProfessor + ",Professor," + nomeProfessor + "," + celularProfessor + "," + dataNascProfessor + ",,,,,\n");
         } catch (java.io.IOException e) {
