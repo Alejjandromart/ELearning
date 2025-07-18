@@ -472,9 +472,21 @@ public class Main {
         }
         System.out.println("Digite o tipo de plano:");
         String tipoPlano = sc.nextLine();
-        System.out.println("Digite o valor da assinatura:");
-        double valorAssinatura = sc.nextDouble();
-        sc.nextLine();
+        double valorAssinatura = 0.0;
+        while (true) {
+            System.out.println("Digite o valor da assinatura (ex: 2.75):");
+            String valorStr = sc.nextLine();
+            if (!valorStr.matches("^\\d{1,4}(\\.\\d{1,2})?$")) {
+                System.out.println("Valor inválido! Digite um número decimal válido, ex: 2.75");
+                continue;
+            }
+            try {
+                valorAssinatura = Double.parseDouble(valorStr);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Valor inválido! Digite um número decimal válido, ex: 2.75");
+            }
+        }
         Assinatura assinatura = null;
         if (aluno != null) {
             assinatura = new Assinatura(idAssinatura, aluno.getId(), tipoPlano, valorAssinatura);
