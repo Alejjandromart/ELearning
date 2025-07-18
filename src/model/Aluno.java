@@ -6,9 +6,9 @@ public class Aluno extends Usuario {
     private long celular;
     private Date dataNasc;
     private int aulaAtual;
-    private int pontos;
+    private double pontos;
 
-    public Aluno(int id, String nome, long celular, Date dataNasc, int aulaAtual, int pontos) {
+    public Aluno(int id, String nome, long celular, Date dataNasc, int aulaAtual, double pontos) {
         super(id, nome);
         this.celular = celular;
         this.dataNasc = dataNasc;
@@ -20,13 +20,13 @@ public class Aluno extends Usuario {
         // Lógica para entregar exercício
         System.out.println("Exercício " + idExercicio + " entregue pelo aluno " + idAluno + ": " + this.nome);
         return true;
-    private double pontos;
+    }
 
     public static Aluno criarAlunoPorTeclado() {
         // ATENÇÃO: Não fechar o Scanner aqui para evitar NoSuchElementException em aplicações interativas.
         // O Scanner é fechado no método main, garantindo o uso seguro durante toda a execução do programa.
         java.util.Scanner sc = new java.util.Scanner(System.in);
-        this.pontos = (double) pontos;
+        int id = 0;
         while (true) {
             System.out.println("Digite o ID do aluno (exatamente 8 dígitos):");
             String idStr = sc.nextLine();
@@ -70,15 +70,19 @@ public class Aluno extends Usuario {
                 System.out.println("Valor inválido! Digite exatamente 6 dígitos numéricos.");
             }
         }
-        int pontos = 0;
+        double pontos = 0.0;
         while (true) {
-            System.out.println("Digite os pontos do aluno (máximo 4 dígitos):");
+            System.out.println("Digite os pontos do aluno (máximo 4 dígitos antes do ponto e até 2 após, ex: 10.00):");
             String pontosStr = sc.nextLine();
-            if (pontosStr.matches("\\d{1,4}")) {
-                pontos = Integer.parseInt(pontosStr);
-                break;
+            if (pontosStr.matches("^\\d{1,4}(\\.\\d{1,2})?$")) {
+                try {
+                    pontos = Double.parseDouble(pontosStr);
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Valor inválido! Digite um número decimal válido.");
+                }
             } else {
-                System.out.println("Valor inválido! Digite até 4 dígitos numéricos.");
+                System.out.println("Valor inválido! Digite até 4 dígitos antes do ponto e até 2 após (ex: 10.00).");
             }
         }
         Aluno aluno = new Aluno(id, nome, celular, dataNasc, aulaAtual, pontos);
@@ -87,19 +91,19 @@ public class Aluno extends Usuario {
     }
 
     // Getters e Setters específicos
-        Aluno aluno = new Aluno(id, nome, celular, dataNasc, aulaAtual, (double) pontos);
+    public int getAulaAtual() {
         return aulaAtual;
     }
 
     public void setAulaAtual(int aulaAtual) {
-        this.pontos = (double) pontos;
+        this.aulaAtual = aulaAtual;
     }
 
-        return this.pontos;
+    public double getPontos() {
         return pontos;
     }
 
-    public void setPontos(int pontos) {
+    public void setPontos(double pontos) {
         this.pontos = pontos;
     }
 
