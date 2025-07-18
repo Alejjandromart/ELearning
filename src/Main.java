@@ -20,21 +20,69 @@ public class Main {
         Curso curso = null;
         Assinatura assinatura = null;
 
-        // Carrega cadastros do arquivo CSV
+        // Listas para armazenar todos os dados carregados
         java.util.List<Aluno> alunos = new java.util.ArrayList<>();
+        java.util.List<Professor> professores = new java.util.ArrayList<>();
+        java.util.List<Atendente> atendentes = new java.util.ArrayList<>();
+        java.util.List<Curso> cursos = new java.util.ArrayList<>();
+        java.util.List<Assinatura> assinaturas = new java.util.ArrayList<>();
+
+        // Carrega cadastros do arquivo CSV
         try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader("bin/cadastros.csv"))) {
             String linha;
             while ((linha = br.readLine()) != null) {
                 String[] partes = linha.split(",");
                 if (partes.length > 1) {
                     String tipo = partes[1];
-                    if ("Aluno".equalsIgnoreCase(tipo)) {
-                        int id = Integer.parseInt(partes[0]);
-                        String nome = partes[2];
-                        long celular = partes[3].isEmpty() ? 0 : Long.parseLong(partes[3]);
-                        alunos.add(new Aluno(id, nome, celular, new java.util.Date(), 0, 0));
+                    switch (tipo) {
+                        case "Aluno":
+                            try {
+                                int id = Integer.parseInt(partes[0]);
+                                String nome = partes[2];
+                                long celular = partes[3].isEmpty() ? 0 : Long.parseLong(partes[3]);
+                                alunos.add(new Aluno(id, nome, celular, new java.util.Date(), 0, 0));
+                                registrarId(id);
+                            } catch (Exception e) { /* ignora linha inválida */ }
+                            break;
+                        case "Professor":
+                            try {
+                                int id = Integer.parseInt(partes[0]);
+                                String nome = partes[2];
+                                long celular = partes[3].isEmpty() ? 0 : Long.parseLong(partes[3]);
+                                professores.add(new Professor(id, nome, celular, new java.util.Date()));
+                                registrarId(id);
+                            } catch (Exception e) { /* ignora linha inválida */ }
+                            break;
+                        case "Atendente":
+                            try {
+                                int id = Integer.parseInt(partes[0]);
+                                String nome = partes[2];
+                                long celular = partes[3].isEmpty() ? 0 : Long.parseLong(partes[3]);
+                                int matricula = (partes.length > 6 && !partes[6].isEmpty()) ? Integer.parseInt(partes[6]) : 0;
+                                atendentes.add(new Atendente(id, nome, celular, new java.util.Date(), "Atendente", matricula));
+                                registrarId(id);
+                            } catch (Exception e) { /* ignora linha inválida */ }
+                            break;
+                        case "Curso":
+                            try {
+                                int id = Integer.parseInt(partes[0]);
+                                String nome = partes[2];
+                                cursos.add(new Curso(id, nome));
+                            } catch (Exception e) { /* ignora linha inválida */ }
+                            break;
+                        case "Assinatura":
+                            try {
+                                int id = Integer.parseInt(partes[0]);
+                                int idAluno = 0;
+                                String tipoPlano = (partes.length > 8) ? partes[8] : "";
+                                double valor = (partes.length > 9 && !partes[9].isEmpty()) ? Double.parseDouble(partes[9]) : 0.0;
+                                assinaturas.add(new Assinatura(id, idAluno, tipoPlano, valor));
+                            } catch (Exception e) { /* ignora linha inválida */ }
+                            break;
+                        default:
+                            // outros tipos
+                            break;
                     }
-                    // Adicione outros tipos conforme necessário
                 }
             }
         } catch (Exception e) {
