@@ -52,13 +52,11 @@ public class Main {
             System.out.println("1. Cadastrar Usuário");
             System.out.println("2. Atendente");
             System.out.println("3. Entregar Exercício");
-            System.out.println("4. Efetuar Assinatura");
-            System.out.println("5. Atender Usuário");
-            System.out.println("6. Adicionar Curso ao Professor");
-            System.out.println("7. Corrigir Exercício");
-            System.out.println("8. Calcular Progresso");
-            System.out.println("9. Emitir Fatura");
-            System.out.println("10. Exibir Informações do Aluno");
+            System.out.println("4. Adicionar Curso ao Professor");
+            System.out.println("5. Corrigir Exercício");
+            System.out.println("6. Calcular Progresso");
+            System.out.println("7. Emitir Fatura");
+            System.out.println("8. Exibir Informações do Aluno");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = sc.nextInt();
@@ -68,6 +66,7 @@ public class Main {
                     System.out.println("\n--- Cadastrar Usuário ---");
                     System.out.println("1. Aluno");
                     System.out.println("2. Professor");
+                    System.out.println("0. Voltar ao menu principal");
                     System.out.print("Escolha o tipo de usuário: ");
                     int tipoUsuario = sc.nextInt();
                     sc.nextLine();
@@ -78,6 +77,9 @@ public class Main {
                         case 2:
                             professor = cadastrarProfessor(sc);
                             break;
+                        case 0:
+                            // Voltar ao menu principal
+                            break;
                         default:
                             System.out.println("Opção inválida!");
                     }
@@ -87,6 +89,9 @@ public class Main {
                     System.out.println("1. Cadastrar Atendente");
                     System.out.println("2. Cadastrar Curso");
                     System.out.println("3. Cadastrar Assinatura");
+                    System.out.println("4. Efetuar Assinatura");
+                    System.out.println("5. Atender Usuário");
+                    System.out.println("0. Voltar ao menu principal");
                     System.out.print("Escolha uma opção: ");
                     int opAtendente = sc.nextInt();
                     sc.nextLine();
@@ -99,6 +104,15 @@ public class Main {
                             break;
                         case 3:
                             assinatura = cadastrarAssinatura(sc, aluno);
+                            break;
+                        case 4:
+                            efetuarAssinatura(atendente, aluno);
+                            break;
+                        case 5:
+                            atenderUsuario(atendente, aluno);
+                            break;
+                        case 0:
+                            // Voltar ao menu principal
                             break;
                         default:
                             System.out.println("Opção inválida!");
@@ -114,15 +128,9 @@ public class Main {
                     entregarExercicio(aluno, idAlunoEntrega, idExercicioEntrega);
                     break;
                 case 4:
-                    efetuarAssinatura(atendente, aluno);
-                    break;
-                case 5:
-                    atenderUsuario(atendente, aluno);
-                    break;
-                case 6:
                     adicionarCursoAoProfessor(professor, curso);
                     break;
-                case 7:
+                case 5:
                     System.out.println("Digite o ID do aluno para corrigir a tarefa:");
                     int idAlunoCorrigir = sc.nextInt();
                     sc.nextLine();
@@ -131,13 +139,13 @@ public class Main {
                     sc.nextLine();
                     corrigirExercicio(professor, idAlunoCorrigir, idTarefaCorrigir);
                     break;
-                case 8:
+                case 6:
                     calcularProgresso(curso, aluno);
                     break;
-                case 9:
+                case 7:
                     emitirFatura(assinatura, aluno);
                     break;
-                case 10:
+                case 8:
                     exibirInformacoes(aluno, atendente);
                     break;
                 case 0:
