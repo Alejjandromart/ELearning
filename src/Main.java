@@ -302,6 +302,10 @@ public class Main {
                         System.out.println("Nenhum aluno cadastrado encontrado.");
                         break;
                     }
+                    System.out.println("Alunos cadastrados:");
+                    for (Aluno a : alunos) {
+                        System.out.println("ID: " + a.getId() + " | Nome: " + a.getNome() + " | Celular: " + a.getCelular());
+                    }
                     System.out.println("Digite o ID do aluno para exibir as informações (8 dígitos):");
                     String idAlunoInfoStr = sc.nextLine();
                     if (!idAlunoInfoStr.matches("^\\d{8}$")) {
