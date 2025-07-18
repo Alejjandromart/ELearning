@@ -398,8 +398,16 @@ public class Main {
     }
 
     private static void emitirFatura(Assinatura assinatura, Aluno aluno) {
-        if (assinatura != null && aluno != null) assinatura.emitirFatura(assinatura.getIdAssinatura(), aluno.getId(), 5001, 1);
-        else System.out.println("Cadastre assinatura e aluno primeiro!");
+        if (assinatura != null && aluno != null) {
+            int[] fatura = assinatura.emitirFatura(assinatura.getIdAssinatura(), aluno.getId(), 5001, 1);
+            System.out.println("\nFatura emitida com sucesso!");
+            System.out.println("ID Assinatura: " + fatura[0]);
+            System.out.println("ID Aluno: " + fatura[1]);
+            System.out.println("Nota Fiscal: " + fatura[2]);
+            System.out.println("Via: " + fatura[3]);
+        } else {
+            System.out.println("Cadastre assinatura e aluno primeiro!");
+        }
     }
 
     private static void exibirInformacoes(Aluno aluno, Atendente atendente) {
