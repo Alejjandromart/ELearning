@@ -382,8 +382,15 @@ public class Main {
     }
 
     private static void calcularProgresso(Curso curso, Aluno aluno) {
-        if (curso != null && aluno != null) curso.calcularProgresso(aluno.getId(), curso.getIdCurso());
-        else System.out.println("Cadastre curso e aluno primeiro!");
+        if (curso != null && aluno != null) {
+            int[] progresso = curso.calcularProgresso(aluno.getId(), curso.getIdCurso());
+            System.out.println("Progresso do aluno no curso:");
+            System.out.println("ID Aluno: " + progresso[0]);
+            System.out.println("ID Curso: " + progresso[1]);
+            System.out.println("Progresso: " + progresso[2] + "%");
+        } else {
+            System.out.println("Cadastre curso e aluno primeiro!");
+        }
     }
 
     private static void emitirFatura(Assinatura assinatura, Aluno aluno) {
