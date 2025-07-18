@@ -172,7 +172,29 @@ public class Main {
                     emitirFatura(assinatura, aluno);
                     break;
                 case 8:
-                    exibirInformacoes(aluno, atendente);
+                    if (alunos.isEmpty()) {
+                        System.out.println("Nenhum aluno cadastrado encontrado.");
+                        break;
+                    }
+                    System.out.println("Digite o ID do aluno para exibir as informações (8 dígitos):");
+                    String idAlunoInfoStr = sc.nextLine();
+                    if (!idAlunoInfoStr.matches("^\\d{8}$")) {
+                        System.out.println("ID inválido! O ID do aluno deve conter exatamente 8 dígitos numéricos.");
+                        break;
+                    }
+                    int idAlunoInfo = Integer.parseInt(idAlunoInfoStr);
+                    Aluno alunoInfo = null;
+                    for (Aluno a : alunos) {
+                        if (a.getId() == idAlunoInfo) {
+                            alunoInfo = a;
+                            break;
+                        }
+                    }
+                    if (alunoInfo == null) {
+                        System.out.println("Aluno não encontrado com esse ID.");
+                        break;
+                    }
+                    exibirInformacoes(alunoInfo, atendente);
                     break;
                 case 0:
                     System.out.println("Saindo...");
