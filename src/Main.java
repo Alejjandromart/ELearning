@@ -169,9 +169,13 @@ public class Main {
         // Coleta dados do aluno manualmente para tratar pontos como decimal
         int idAluno = 0;
         while (true) {
-            System.out.println("Digite o ID do aluno:");
-            idAluno = sc.nextInt();
-            sc.nextLine();
+            System.out.println("Digite o ID do aluno (8 dígitos):");
+            String idAlunoStr = sc.nextLine();
+            if (!idAlunoStr.matches("^\\d{8}$")) {
+                System.out.println("ID inválido! O ID do aluno deve conter exatamente 8 dígitos numéricos.");
+                continue;
+            }
+            idAluno = Integer.parseInt(idAlunoStr);
             if (idJaCadastrado(idAluno)) {
                 System.out.println("ID já utilizado por outro usuário! Digite um ID diferente.");
             } else {
@@ -233,9 +237,13 @@ public class Main {
     private static Atendente cadastrarAtendente(Scanner sc) {
         int idAtendente = 0;
         while (true) {
-            System.out.println("Digite o ID do atendente:");
-            idAtendente = sc.nextInt();
-            sc.nextLine();
+            System.out.println("Digite o ID do atendente (8 dígitos):");
+            String idAtendenteStr = sc.nextLine();
+            if (!idAtendenteStr.matches("^\\d{8}$")) {
+                System.out.println("ID inválido! O ID do atendente deve conter exatamente 8 dígitos numéricos.");
+                continue;
+            }
+            idAtendente = Integer.parseInt(idAtendenteStr);
             if (idJaCadastrado(idAtendente)) {
                 System.out.println("ID já utilizado por outro usuário! Digite um ID diferente.");
             } else {
@@ -274,9 +282,13 @@ public class Main {
     private static Professor cadastrarProfessor(Scanner sc) {
         int idProfessor = 0;
         while (true) {
-            System.out.println("Digite o ID do professor:");
-            idProfessor = sc.nextInt();
-            sc.nextLine();
+            System.out.println("Digite o ID do professor (8 dígitos):");
+            String idProfessorStr = sc.nextLine();
+            if (!idProfessorStr.matches("^\\d{8}$")) {
+                System.out.println("ID inválido! O ID do professor deve conter exatamente 8 dígitos numéricos.");
+                continue;
+            }
+            idProfessor = Integer.parseInt(idProfessorStr);
             if (idJaCadastrado(idProfessor)) {
                 System.out.println("ID já utilizado por outro usuário! Digite um ID diferente.");
             } else {
@@ -308,9 +320,17 @@ public class Main {
     }
 
     private static Curso cadastrarCurso(Scanner sc) {
-        System.out.println("Digite o ID do curso:");
-        int idCurso = sc.nextInt();
-        sc.nextLine();
+        int idCurso = 0;
+        while (true) {
+            System.out.println("Digite o ID do curso (8 dígitos):");
+            String idCursoStr = sc.nextLine();
+            if (!idCursoStr.matches("^\\d{8}$")) {
+                System.out.println("ID inválido! O ID do curso deve conter exatamente 8 dígitos numéricos.");
+                continue;
+            }
+            idCurso = Integer.parseInt(idCursoStr);
+            break;
+        }
         System.out.println("Digite o nome do curso:");
         String nomeCurso = sc.nextLine();
         Curso curso = new Curso(idCurso, nomeCurso);
@@ -323,9 +343,17 @@ public class Main {
     }
 
     private static Assinatura cadastrarAssinatura(Scanner sc, Aluno aluno) {
-        System.out.println("Digite o ID da assinatura:");
-        int idAssinatura = sc.nextInt();
-        sc.nextLine();
+        int idAssinatura = 0;
+        while (true) {
+            System.out.println("Digite o ID da assinatura (8 dígitos):");
+            String idAssinaturaStr = sc.nextLine();
+            if (!idAssinaturaStr.matches("^\\d{8}$")) {
+                System.out.println("ID inválido! O ID da assinatura deve conter exatamente 8 dígitos numéricos.");
+                continue;
+            }
+            idAssinatura = Integer.parseInt(idAssinaturaStr);
+            break;
+        }
         System.out.println("Digite o tipo de plano:");
         String tipoPlano = sc.nextLine();
         System.out.println("Digite o valor da assinatura:");
